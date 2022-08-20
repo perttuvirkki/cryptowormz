@@ -1,0 +1,38 @@
+[
+  {
+    "CONTRACT_ADDRESS": "0x610CA70b7a61F405D080C1D618382a81FeD1C878",
+    "SCAN_LINK": "https://ftmscan.com/address/0x610CA70b7a61F405D080C1D618382a81FeD1C878",
+    "NETWORK": {
+      "NAME": "Fantom",
+      "SYMBOL": "FTM",
+      "ID": 250
+    },
+    "NFT_NAME": "CryptoWormzHD",
+    "SYMBOL": "CWHD",
+    "MAX_SUPPLY": 7777,
+    "WEI_COST": 2500000000000000000,
+    "DISPLAY_COST": 2.5,
+    "GAS_LIMIT": 285000,
+    "MARKETPLACE": "NFTKey",
+    "MARKETPLACE_LINK": "https://nftkey.app/collections/cryptowormzhd/",
+    "SHOW_BACKGROUND": true
+  },
+  {
+    "CONTRACT_ADDRESS": "0xCBBe2541028619570181348518153156ADef92E0",
+    "SCAN_LINK": "https://ftmscan.com/address/0xCBBe2541028619570181348518153156ADef92E0",
+    "NETWORK": {
+      "NAME": "Fantom",
+      "SYMBOL": "FTM",
+      "ID": 250
+    },
+    "NFT_NAME": "CryptoWormz",
+    "SYMBOL": "CW",
+    "MAX_SUPPLY": 7777,
+    "WEI_COST": 10000000000000000,
+    "DISPLAY_COST": 1,
+    "GAS_LIMIT": 285000,
+    "MARKETPLACE": "NFTKey",
+    "MARKETPLACE_LINK": "https://nftkey.app/collections/cryptowormz/",
+    "SHOW_BACKGROUND": true
+  }
+]
