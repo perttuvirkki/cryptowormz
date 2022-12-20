@@ -165,7 +165,7 @@ function App() {
     "5000000000000000000",
     "10000000000000000000",
   ];
-  const [bwprice, setBwprice] = useState("10000000000000000000");
+  const [bwprice, setBwprice] = useState("5000000000000000000");
   const handlePriceChange = (e) => {
     setBwprice(e.target.value);
   };
@@ -185,7 +185,7 @@ function App() {
         <img src="./images/city.png" />
         <div id="glow" style={{ backgroundColor: setBgColor() }}></div>
       </div>
-      <div className="log">
+      {/* <div className="log">
         {blockchain.account === "" || blockchain.smartContract === null ? (
           <>
             <button
@@ -205,7 +205,7 @@ function App() {
         ) : (
           <>{hideLog()}</>
         )}
-      </div>
+      </div> */}
       <div className="site">
         <div className="controls">
           <a id="controlslink" href="https://twitter.com/crypto_wormz">
@@ -239,178 +239,240 @@ function App() {
 
         <div className="site-container">
           <div id="Mintery">
-            <div id="Masthead" className="note">
-              <fieldset>
-                <legend>Pay what you want!</legend>
-                <p>(keep in mind we like beer)</p>
-                <div className="toggle">
-                  {bwprices.map((result) => (
-                    <>
-                      <input
-                        type="radio"
-                        name="paywhatuwant"
-                        checked={bwprice === result}
-                        onChange={(e) => handlePriceChange(e)}
-                        value={result}
-                        id={result}
-                      />
-                      <label for={result}>
-                        {" "}
-                        {result / 1000000000000000000} <br />
-                        ftm
-                      </label>
-                    </>
-                  ))}
-                </div>
-              </fieldset>
-              <button
-                href=""
-                className="claimbutton"
-                disabled={claimingNft ? 1 : 0}
-                onClick={(e) => {
-                  e.preventDefault();
-                  dispatch(connect(1));
-                  claimNFTs(1);
-                  getData();
-                }}
-              >
-                {claimingNft ? "BUSY" : "Claim whats yours!"}
-              </button>
-            </div>
-            <div id="Actions">
-              <div className="note">
-                <header>
-                  <p>
-                    <strong>
-                      1 free mint per wallet for wormz who are still alive.
-                    </strong>
-                  </p>
-                </header>
-                <div className="divide" />
-
-                <main>
-                  <img id="Cage" src="../images/cage.png" width="56px" />
-                  <p>
-                    <strong>We are minting 25 Wormz.</strong> The Wormnation is
-                    generous, and will hand these over to brave members.
-                  </p>
-                </main>
-                <div className="divide" />
-                <footer>
-                  <p>
-                    No roadmap. No utility. Holders might be rewarded in the
-                    future. CC0.{" "}
-                  </p>
-                </footer>
-                <div id="Follow">
-                  <span>#BEYONDWORMZ</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div id="Actions">
             <img
-              id="Logo"
+              id="mobileLogo"
               className="unselectable"
               loading="lazy"
               src="./images/logo.gif"
               width="400"
             />
+            <div id="Masthead" className="note">
+              {blockchain.account === "" ||
+              blockchain.smartContract === null ? (
+                <>
+                  <p>
+                    The Wormnation operates in the <br />
+                    Fantom network
+                  </p>
+                  <button
+                    className="claimbutton"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      dispatch(connect(1));
+                      getData();
+                    }}
+                  >
+                    LETS GO!
+                  </button>
+                  {blockchain.errorMsg !== "" ? (
+                    <>
+                      <p>{blockchain.errorMsg}</p>
+                    </>
+                  ) : null}
+                </>
+              ) : (
+                <>
+                  {blockchain.smartContract._address !==
+                  CONFIG[1].CONTRACT_ADDRESS ? (
+                    <>
+                      <p>Y'all got any more of those Beyond Worms?</p>
+                      <button
+                        className="claimbutton"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          dispatch(connect(1));
+                          getData();
+                          console.log(blockchain.smartContract._address);
+                        }}
+                      >
+                        Check availability
+                      </button>
+                    </>
+                  ) : Number(data.totalSupply) >= CONFIG[1].MAX_SUPPLY ? (
+                    <div>
+                      <h1>Thank you!</h1>
+                      <p>
+                        All the BeyondWormz have been claimed! <br />
+                        Check the community pages and come say hi!
+                      </p>
+                      <a href="https://linktr.ee/cryptowormz">
+                        <img
+                          style={{ width: "100px", marginBottom: "5%" }}
+                          src="./images/market.png"
+                          alt=""
+                        />
+                      </a>
+                    </div>
+                  ) : (
+                    <>
+                      <button
+                        className="claimbutton"
+                        disabled={claimingNft ? 1 : 0}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          dispatch(connect(1));
+                          claimNFTs(1);
+                          getData();
+                        }}
+                      >
+                        {claimingNft ? (
+                          feedback
+                        ) : (
+                          <>
+                            Claim what's <span>yours!</span>
+                          </>
+                        )}
+                      </button>
+                      <fieldset>
+                        <legend>Pay what you want!</legend>
+                        <p>(keep in mind we like beer)</p>
+                        <div className="toggle">
+                          {bwprices.map((result) => (
+                            <>
+                              <input
+                                type="radio"
+                                name="paywhatuwant"
+                                checked={bwprice === result}
+                                onChange={(e) => handlePriceChange(e)}
+                                value={result}
+                                id={result}
+                              />
+                              <label for={result}>
+                                {" "}
+                                {result / 1000000000000000000} <br />
+                                ftm
+                              </label>
+                            </>
+                          ))}
+                        </div>
+                      </fieldset>
+                    </>
+                  )}
+                </>
+              )}
+            </div>
             <div className="note">
               <header>
-                <p>
-                  <strong>
-                    Digging in just now? Get some Wormz to claim a Beyond Worm.
-                  </strong>{" "}
-                </p>
                 {blockchain.account === "" ||
                 blockchain.smartContract === null ? (
-                  <s.Container ai={"center"} jc={"center"}>
-                    <s.TextDescription
-                      style={{
-                        textAlign: "center",
-                        color: "var(--accent-text)",
-                      }}
-                    >
-                      Connect to the {CONFIG[0].NETWORK.NAME} network{" "}
-                    </s.TextDescription>
-                    <s.StyledButton
-                      onClick={(e) => {
-                        e.preventDefault();
-                        dispatch(connect(0));
-                        getData();
-                      }}
-                    >
-                      CONNECT
-                    </s.StyledButton>
+                  <div>
+                    <p>Connect to the {CONFIG[0].NETWORK.NAME} network </p>
                     {blockchain.errorMsg !== "" ? (
                       <>
-                        <s.SpacerSmall />
+                        <p>{blockchain.errorMsg}</p>
+                      </>
+                    ) : null}
+                  </div>
+                ) : (
+                  <>
+                    {blockchain.smartContract._address !==
+                    CONFIG[0].CONTRACT_ADDRESS ? (
+                      <>
+                        <p>
+                          <strong>
+                            Digging in just now? Get some Wormz to claim a
+                            Beyond Worm, if there are any left!
+                          </strong>{" "}
+                        </p>
+                        <button
+                          className="claimbutton"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            dispatch(connect(0));
+                            getData();
+                            console.log(blockchain.smartContract._address);
+                          }}
+                        >
+                          Check availability
+                        </button>
+                      </>
+                    ) : Number(data.totalSupply) >= CONFIG[1].MAX_SUPPLY ? (
+                      <div>
+                        <h1>Thank you!</h1>
+                        <p>
+                          All the HD Worms have been minted! <br />
+                          Check the community pages and come say hi!
+                        </p>
+                        <a
+                          className="controls"
+                          href="https://linktr.ee/cryptowormz"
+                        >
+                          <img
+                            style={{ width: "100px", marginBottom: "5%" }}
+                            src="./images/market.png"
+                            alt=""
+                          />
+                        </a>
+                      </div>
+                    ) : (
+                      <>
+                        <p>
+                          <strong>
+                            Digging in just now? Get some Wormz to claim a
+                            Beyond Worm, if there are any left!
+                          </strong>{" "}
+                        </p>
                         <s.TextDescription
                           style={{
                             textAlign: "center",
                             color: "var(--accent-text)",
                           }}
                         >
-                          {blockchain.errorMsg}
+                          {CONFIG[0].DISPLAY_COST} FTM each
+                          <br />
+                          {CONFIG[0].MAX_SUPPLY - data.totalSupply} left
                         </s.TextDescription>
+                        <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                          <s.StyledRoundButton
+                            style={{ lineHeight: 0.4 }}
+                            disabled={claimingNft ? 1 : 0}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              decrementMintAmount();
+                            }}
+                          >
+                            -
+                          </s.StyledRoundButton>
+                          <s.SpacerMedium />
+                          <s.TextDescription
+                            style={{
+                              textAlign: "center",
+                              color: "var(--accent-text)",
+                            }}
+                          >
+                            {mintAmount}
+                          </s.TextDescription>
+                          <s.SpacerMedium />
+                          <s.StyledRoundButton
+                            disabled={claimingNft ? 1 : 0}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              incrementMintAmount();
+                            }}
+                          >
+                            +
+                          </s.StyledRoundButton>
+                        </s.Container>
+                        <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                          <button
+                            className="claimbutton"
+                            disabled={claimingNft ? 1 : 0}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              dispatch(connect(0));
+                              claimNFTs(0);
+                              getData();
+                            }}
+                          >
+                            {claimingNft ? feedback : "buy a HD worm"}
+                          </button>
+                        </s.Container>
                       </>
-                    ) : null}
-                  </s.Container>
-                ) : (
-                  <>
-                    <p>{feedback}</p>
-                    <p>
-                      {CONFIG[0].MAX_SUPPLY - data.totalSupply} left,{" "}
-                      {CONFIG[0].DISPLAY_COST} FTM each
-                    </p>
-                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <s.StyledRoundButton
-                        style={{ lineHeight: 0.4 }}
-                        disabled={claimingNft ? 1 : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          decrementMintAmount();
-                        }}
-                      >
-                        -
-                      </s.StyledRoundButton>
-                      <s.SpacerMedium />
-                      <s.TextDescription
-                        style={{
-                          textAlign: "center",
-                          color: "var(--accent-text)",
-                        }}
-                      >
-                        {mintAmount}
-                      </s.TextDescription>
-                      <s.SpacerMedium />
-                      <s.StyledRoundButton
-                        disabled={claimingNft ? 1 : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          incrementMintAmount();
-                        }}
-                      >
-                        +
-                      </s.StyledRoundButton>
-                    </s.Container>
-                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <s.StyledButton
-                        disabled={claimingNft ? 1 : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          dispatch(connect(0));
-                          claimNFTs(0);
-                          getData();
-                        }}
-                      >
-                        {claimingNft ? "BUSY" : "BUY"}
-                      </s.StyledButton>
-                    </s.Container>
+                    )}
                   </>
                 )}
               </header>
+
               <div className="divide" />
 
               <main>
@@ -426,6 +488,45 @@ function App() {
                   </a>
                 </p>
               </main>
+            </div>
+          </div>
+          <div id="Actions">
+            <img
+              id="Logo"
+              className="unselectable"
+              loading="lazy"
+              src="./images/logo.gif"
+              width="400"
+            />
+            <div className="note">
+              <header>
+                <p>
+                  <strong>
+                    1 free mint per wallet for wormz who are still alive. <br />
+                    Claim yours as long as you are holding one of the OG worms
+                    and a HD worm!
+                  </strong>
+                </p>
+              </header>
+              <div className="divide" />
+
+              <main>
+                <img id="Cage" src="../images/cage.png" width="56px" />
+                <p>
+                  <strong>We are minting 25 Wormz.</strong> The Wormnation is
+                  generous, and will hand these over to brave members.
+                </p>
+              </main>
+              <div className="divide" />
+              <footer>
+                <p>
+                  No roadmap. No utility. Holders might be rewarded in the
+                  future. CC0.{" "}
+                </p>
+              </footer>
+              <div id="Follow">
+                <span>#BEYONDWORMZ</span>
+              </div>
             </div>
           </div>
         </div>

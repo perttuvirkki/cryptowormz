@@ -54,30 +54,13 @@ export const TextSubTitle = styled.p`
 export const TextDescription = styled.p`
   color: var(--primary-text);
   font-size: 16px;
+  font-weight: 300;
   line-height: 1.6;
 `;
 
 export const StyledClickable = styled.div`
   :active {
     opacity: 0.6;
-  }
-`;
-
-export const StyledButton = styled.button`
-  width: 100px;
-  padding: 10px;
-  background: #fff;
-  border: 1px solid black;
-  border-radius: 50px;
-  color: #000;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.4s;
-  :hover {
-    box-shadow: inset 0 0 0 4px #ef476f, inset 0 0 0 8px #ffd166,
-      inset 0 0 0 12px #06d6a0, inset 0 0 0 16px #118ab2;
-    background: #073b4c;
-    color: #fff;
   }
 `;
 
