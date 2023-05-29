@@ -18,21 +18,21 @@
     "SHOW_BACKGROUND": true
   },
   {
-    "CONTRACT_ADDRESS": "0xCBBe2541028619570181348518153156ADef92E0",
-    "SCAN_LINK": "https://ftmscan.com/address/0xCBBe2541028619570181348518153156ADef92E0",
+    "CONTRACT_ADDRESS": "0x0DC85C3ce6E3d502f92C4e8e1518EBa45f53b23f",
+    "SCAN_LINK": "https://ftmscan.com/address/0x0DC85C3ce6E3d502f92C4e8e1518EBa45f53b23f",
     "NETWORK": {
       "NAME": "Fantom",
       "SYMBOL": "FTM",
       "ID": 250
     },
-    "NFT_NAME": "CryptoWormz",
-    "SYMBOL": "CW",
-    "MAX_SUPPLY": 7777,
+    "NFT_NAME": "BeyondWormz",
+    "SYMBOL": "BW",
+    "MAX_SUPPLY": 500,
     "WEI_COST": 10000000000000000,
-    "DISPLAY_COST": 1,
+    "DISPLAY_COST": 0,
     "GAS_LIMIT": 285000,
     "MARKETPLACE": "NFTKey",
-    "MARKETPLACE_LINK": "https://nftkey.app/collections/cryptowormz/",
+    "MARKETPLACE_LINK": "https://nftkey.app/collections/beyondwormz/",
     "SHOW_BACKGROUND": true
   }
 ]

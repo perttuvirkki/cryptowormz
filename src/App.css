@@ -206,8 +206,19 @@ button:hover,
   color: white;
 }
 
-a {
+.link {
   text-decoration: none;
+  border: 0;
+  border-bottom-width: 3px;
+  border-style: solid;
+  padding: 2px;
+  color: black;
+  border-color: #81afa4;
+}
+
+.link:hover {
+  background-color: #81afa4;
+  border-color: #81afa4;
 }
 
 @keyframes flicker {
@@ -312,6 +323,8 @@ body:not(:-moz-handler-blocked) fieldset {
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: stretch;
+  border: 2px solid #000;
+  border-radius: 6px;
 }
 .toggle input {
   width: 0;
@@ -321,7 +334,7 @@ body:not(:-moz-handler-blocked) fieldset {
 }
 .toggle input + label {
   margin: 0;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 1.5rem;
   box-sizing: border-box;
   position: relative;
   display: inline-block;
