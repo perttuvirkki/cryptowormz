@@ -54,7 +54,7 @@ function App() {
   const claimNFTs = (i) => {
     let cost = CONFIG[i].WEI_COST;
     let gasLimit = CONFIG[i].GAS_LIMIT;
-    let totalCostWei = String(cost * mintAmount);
+    let totalCostWei = String(cost);
     let totalGasLimit = String(gasLimit * mintAmount);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
@@ -159,19 +159,14 @@ function App() {
     return bgColor;
   };
 
-  let bwprices = [
-    "0",
-    "1000000000000000000",
-    "5000000000000000000",
-    "10000000000000000000",
-    "25000000000000000000",
-  ];
+  let bwprices = ["0", "1000000000000000000", "5000000000000000000", "10000000000000000000", "25000000000000000000"];
   const [bwprice, setBwprice] = useState("5000000000000000000");
   const handlePriceChange = (e) => {
     setBwprice(e.target.value);
   };
 
   CONFIG[1].WEI_COST = bwprice;
+  CONFIG[0].WEI_COST = bwprice;
 
   const hideLog = () => {
     let overlay = document.querySelector(".log");
@@ -184,11 +179,7 @@ function App() {
       <div id="City">
         <img alt="bg" src={bg()} />
         <img alt="city" src="./images/city.png" />
-        <div
-          alt="glow"
-          id="glow"
-          style={{ backgroundColor: setBgColor() }}
-        ></div>
+        <div alt="glow" id="glow" style={{ backgroundColor: setBgColor() }}></div>
       </div>
       {/* <div className="log">
         {blockchain.account === "" || blockchain.smartContract === null ? (
@@ -226,17 +217,9 @@ function App() {
 
         <div className="site-container">
           <div id="Mintery">
-            <img
-              alt="mobilelogo"
-              id="mobileLogo"
-              className="unselectable"
-              loading="lazy"
-              src="./images/logo.gif"
-              width="400"
-            />
+            <img alt="mobilelogo" id="mobileLogo" className="unselectable" loading="lazy" src="./images/logo.gif" width="400" />
             <div id="Masthead" className="note">
-              {blockchain.account === "" ||
-              blockchain.smartContract === null ? (
+              {blockchain.account === "" || blockchain.smartContract === null ? (
                 <>
                   <p>
                     The Worm Nation operates in the <br />
@@ -260,8 +243,7 @@ function App() {
                 </>
               ) : (
                 <>
-                  {blockchain.smartContract._address !==
-                  CONFIG[1].CONTRACT_ADDRESS ? (
+                  {blockchain.smartContract._address !== CONFIG[1].CONTRACT_ADDRESS ? (
                     <>
                       <p>Y'all got any more of those Beyond Wormz?</p>
                       <button
@@ -276,8 +258,7 @@ function App() {
                         Check availability
                       </button>
                     </>
-                  ) : Number(blockchain.smartContract.methods.totalSupply()) >=
-                    CONFIG[1].MAX_SUPPLY ? (
+                  ) : Number(blockchain.smartContract.methods.totalSupply()) >= CONFIG[1].MAX_SUPPLY ? (
                     <div>
                       <h1>Thank you!</h1>
                       <p>
@@ -285,11 +266,7 @@ function App() {
                         Check the community pages and come say hi!
                       </p>
                       <a href="https://linktr.ee/cryptowormz">
-                        <img
-                          style={{ width: "100px", marginBottom: "5%" }}
-                          src="./images/market.png"
-                          alt="market"
-                        />
+                        <img style={{ width: "100px", marginBottom: "5%" }} src="./images/market.png" alt="market" />
                       </a>
                     </div>
                   ) : (
@@ -329,7 +306,6 @@ function App() {
                                 id={result}
                               />
                               <label for={result}>
-                                {" "}
                                 {result / 1000000000000000000} <br />
                                 ftm
                               </label>
@@ -342,12 +318,21 @@ function App() {
                 </>
               )}
             </div>
-            <div className="note">
+            <div id="Masthead" className="note">
               <header>
-                {blockchain.account === "" ||
-                blockchain.smartContract === null ? (
+                {blockchain.account === "" || blockchain.smartContract === null ? (
                   <div>
-                    <p>Connect to the {CONFIG[0].NETWORK.NAME} network </p>
+                    <p>
+                      <strong>
+                        New to {CONFIG[0].NETWORK.NAME}?<br />
+                      </strong>
+                      Pop in our discord and we'll get you started!
+                    </p>
+                    <div className="controls">
+                      <a id="controlslink" href="https://discord.com/invite/b4Vt847Peg">
+                        <img alt="discord" src="./images/discord.png" />
+                      </a>
+                    </div>
                     {blockchain.errorMsg !== "" ? (
                       <>
                         <p>{blockchain.errorMsg}</p>
@@ -356,15 +341,12 @@ function App() {
                   </div>
                 ) : (
                   <>
-                    {blockchain.smartContract._address !==
-                    CONFIG[0].CONTRACT_ADDRESS ? (
+                    {blockchain.smartContract._address !== CONFIG[0].CONTRACT_ADDRESS ? (
                       <>
                         <p>
-                          <strong>
-                            Digging in just now? Get some Wormz to claim a
-                            Beyond Worm, if there are any left!
-                          </strong>{" "}
+                          <strong>Digging in just now?</strong>
                         </p>
+                        <p>Get some Wormz to claim a Beyond Worm, if there are any left!</p>
                         <button
                           className="claimbutton"
                           onClick={(e) => {
@@ -377,39 +359,42 @@ function App() {
                           Check availability
                         </button>
                       </>
-                    ) : Number(
-                        blockchain.smartContract.methods.totalSupply()
-                      ) >= CONFIG[1].MAX_SUPPLY ? (
+                    ) : Number(blockchain.smartContract.methods.totalSupply()) >= CONFIG[1].MAX_SUPPLY ? (
                       <div>
                         <h1>Thank you!</h1>
                         <p>
                           All the HD Worms have been minted! <br />
                           Check the community pages and come say hi!
                         </p>
-                        <a
-                          className="controls"
-                          href="https://linktr.ee/cryptowormz"
-                        >
-                          <img
-                            style={{ width: "100px", marginBottom: "5%" }}
-                            src="./images/market.png"
-                            alt="market"
-                          />
+                        <a className="controls" href="https://linktr.ee/cryptowormz">
+                          <img style={{ width: "100px", marginBottom: "5%" }} src="./images/market.png" alt="market" />
                         </a>
                       </div>
                     ) : (
                       <>
-                        <p>
-                          <strong>
-                            Digging in just now? Get some Wormz to claim a
-                            Beyond Worm, if there are any left!
-                          </strong>{" "}
-                        </p>
-                        <p>
-                          {CONFIG[0].DISPLAY_COST} FTM each
-                          <br />
-                          {CONFIG[0].MAX_SUPPLY - data.totalSupply} left
-                        </p>
+                        <fieldset>
+                          <legend>Pay what you want!</legend>
+                          <p>(keep in mind we like beer)</p>
+                          <p>{CONFIG[0].MAX_SUPPLY - data.totalSupply} left</p>
+                          <div className="toggle">
+                            {bwprices.map((result) => (
+                              <>
+                                <input
+                                  type="radio"
+                                  name="paywhatuwant"
+                                  checked={bwprice === result}
+                                  onChange={(e) => handlePriceChange(e)}
+                                  value={result}
+                                  id={result}
+                                />
+                                <label for={result}>
+                                  {result / 1000000000000000000} <br />
+                                  ftm
+                                </label>
+                              </>
+                            ))}
+                          </div>
+                        </fieldset>
                         <s.Container ai={"center"} jc={"center"} fd={"row"}>
                           <s.StyledRoundButton
                             style={{ lineHeight: 0.4 }}
@@ -445,7 +430,7 @@ function App() {
                               getData();
                             }}
                           >
-                            {claimingNft ? feedback : "buy a HD worm"}
+                            {claimingNft ? feedback : "get some HD worms!"}
                           </button>
                         </s.Container>
                       </>
@@ -460,49 +445,29 @@ function App() {
                 <p>
                   <strong>Get Wormz from the flea market:</strong>
                   <br />
-                  <br />
-
-                  <a
-                    className="link"
-                    href="https://nftkey.app/collections/cryptowormz/"
-                  >
-                    OG wormz NFTKEY
-                  </a>
-                  <br />
-                  <br />
-
-                  <a
-                    className="link"
-                    href="https://nftkey.app/collections/cryptowormzhd/"
-                  >
-                    HD wormz NFTKEY
-                  </a>
+                  <div className="controls">
+                    <a id="controlslink" href="https://linktr.ee/cryptowormz">
+                      <img alt="market" src="./images/market.png" />
+                    </a>
+                  </div>
                 </p>
               </main>
             </div>
           </div>
           <div id="Actions">
-            <img
-              alt="logo"
-              id="Logo"
-              className="unselectable"
-              loading="lazy"
-              src="./images/logo.gif"
-              width="400"
-            />
+            <img alt="logo" id="Logo" className="unselectable" loading="lazy" src="./images/logo.gif" width="400" />
             <div className="note">
               <header>
                 <p>
-                  <strong>
-                    1 free mint per wallet for wormz who are still alive.
-                  </strong>
+                  <strong>1 free mint per wallet for wormz who are still alive.</strong>
                   <br />
                   <br />
                   <strong>
                     <u>2+2 OG and HD worms required</u>
-                  </strong>{" "}
-                  to mint a Beyond Worm. This will be the way for future
-                  projects.
+                  </strong>
+                  <br />
+                  <br />
+                  to mint a Beyond Worm. This will be the way for future projects.
                   <br /> <br />
                   <strong>Dont be greedy!</strong>
                 </p>
@@ -510,24 +475,15 @@ function App() {
               <div className="divide" />
 
               <main>
-                <img
-                  alt="cage"
-                  id="Cage"
-                  src="../images/cage.png"
-                  width="56px"
-                />
+                <img alt="cage" id="Cage" src="../images/cage.png" width="56px" />
                 <p>
                   <strong>We are minting 10 Wormz.</strong>
-                  <br /> The Worm Nation is generous, and will hand these over
-                  to brave members.
+                  <br /> The Worm Nation is generous, and will hand these over to brave members.
                 </p>
               </main>
               <div className="divide" />
               <footer>
-                <p>
-                  No roadmap. No utility. Holders might be rewarded in the
-                  future. CC0.
-                </p>
+                <p>No roadmap. No utility. Holders might be rewarded in the future. CC0.</p>
               </footer>
               <div id="Follow">
                 <span>#BEYONDWORMZ</span>
